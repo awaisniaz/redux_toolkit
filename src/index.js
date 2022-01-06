@@ -3,10 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import {configureStore} from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+const initialState = {
+name:'Awais Niaz',
+age:20,
+status:"Single"
+}
+const store = configureStore({
+  reducer:(state)=>{return state},
+  preloadedState:initialState
+})
 ReactDOM.render(
   <React.StrictMode>
+    <Provider store={store}>
     <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
