@@ -35,6 +35,7 @@ function Profile() {
                 // const users = await res.json()
                 // dispatch(updateName('Tayyab Niaz'))
                 // dispatch({type:'UPDATE_NAME',payload:users[0].name})
+                
                 dispatch(updateInfo())
             }}>update name</button>
             
