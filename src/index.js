@@ -5,14 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {configureStore} from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-const initialState = {
-name:'Awais Niaz',
-age:20,
-status:"Single"
-}
+import userReducer from './userReducer';
+
 const store = configureStore({
-  reducer:(state)=>{return state},
-  preloadedState:initialState
+  reducer:userReducer,
+  middleware:[]
 })
 ReactDOM.render(
   <React.StrictMode>
