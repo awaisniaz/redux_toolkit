@@ -1,9 +1,16 @@
-import { createReducer } from "@reduxjs/toolkit";
+import { createReducer, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const initialState = {
   name: "Awais Niaz",
   age: 20,
   status: "Single",
 };
+
+export const fetchUser = createAsyncThunk('fetchusername', async () => {
+  console.log("Asas")
+  const res = await fetch("https://jsonplaceholder.typicode.com/users");
+  const users = await res.json();
+  return users[0].name;
+});
 
 // Old Approach
 
@@ -19,16 +26,38 @@ const initialState = {
 
 // Redux Toolkit Method to create reducer
 
+// export default createReducer(initialState, (builder) => {
+//   builder
+//     .addCase("UPDATE_STATUS", (state, action) => {
+//       state.status = action.payload;
+//     })
+//     .addCase("UPDATE_AGE", (state, action) => {
+//       state.age = action.payload;
+//     })
+//     .addCase("UPDATE_NAME", (state, action) => {
+//       state.name = action.payload;
+//     });
+// });
 
-export default createReducer(initialState, (builder) => {
-  builder
-    .addCase("UPDATE_STATUS", (state, action) => {
-      state.status = action.payload;
-    })
-    .addCase("UPDATE_AGE", (state, action) => {
-      state.age = action.payload;
-    })
-    .addCase("UPDATE_NAME", (state, action) => {
+const userReducer = createSlice({
+  name: "person",
+  initialState,
+  reducers: {
+    updateName(state, action) {
       state.name = action.payload;
-    });
+    },
+    updateAge(state, action) {
+      state.age = action.payload;
+    },
+    updateStatus(state, action) {
+      state.status = action.payload;
+    },
+  },
+  extraReducers: {
+    [fetchUser.fulfilled]: (state, action) => {
+      state.name = action.payload;
+    },
+  },
 });
+export const { updateName, updateStatus, updateAge } = userReducer.actions;
+export default userReducer.reducer;
