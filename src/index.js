@@ -9,7 +9,7 @@ import userReducer from './userReducer';
 
 const store = configureStore({
   reducer:userReducer,
-  middleware:[]
+  // middleware:[]
 })
 ReactDOM.render(
   <React.StrictMode>

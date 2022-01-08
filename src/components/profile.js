@@ -22,6 +22,13 @@ function Profile() {
     // });
     dispatch(updateAge(400));
   };
+
+  const updateNmae =()=>{
+        //      const res = await fetch('https://jsonplaceholder.typicode.com/users')
+        //   const users = await res.json()
+        // //   dispatch(updateName('Tayyab Niaz'))
+        dispatch(fetchUser())
+  }
   return (
     <div>
       <h1>{name}</h1>
@@ -42,14 +49,17 @@ function Profile() {
         Update Age
       </button>
       <button
-        onClick={async() => 
+        onClick={async() => {
           // const res = await fetch('https://jsonplaceholder.typicode.com/users')
           // const users = await res.json()
           // dispatch(updateName('Tayyab Niaz'))
           // dispatch({type:'UPDATE_NAME',payload:users[0].name})
 
-          dispatch(fetchUser())
+        //   dispatch(fetchUser())
+        updateNmae()
+
         }
+    }
       >
         update name
       </button>

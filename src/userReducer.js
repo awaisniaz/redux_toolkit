@@ -5,8 +5,7 @@ const initialState = {
   status: "Single",
 };
 
-export const fetchUser = createAsyncThunk('fetchusername', async () => {
-  console.log("Asas")
+export const fetchUser = createAsyncThunk("fetchusername", async () => {
   const res = await fetch("https://jsonplaceholder.typicode.com/users");
   const users = await res.json();
   return users[0].name;
@@ -57,6 +56,12 @@ const userReducer = createSlice({
     [fetchUser.fulfilled]: (state, action) => {
       state.name = action.payload;
     },
+    [fetchUser.pending]:(state,action)=>{
+      state.name = "Please Wait ..."
+    },
+    [fetchUser.rejected]:(state,action)=>{
+      state.name = "Sorry you are not found."
+    }
   },
 });
 export const { updateName, updateStatus, updateAge } = userReducer.actions;
